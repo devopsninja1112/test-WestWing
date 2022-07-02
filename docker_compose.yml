@@ -1,0 +1,37 @@
+services:
+     db:
+         Image: persona/percona-server:8.0
+         container_name: persona_mysql_8
+         ports:
+           - 6603:6603
+        environment:
+           -  MYSQL_PASSWORD=root
+           -  MYSQL_ROOT_PASSWORD=Admin
+           -  MYSQL_DATABSE=testdome
+         volumes:
+               -  /data:/var/lib/mysql
+         networks:
+               - secure_db_network
+
+#### Adding Nginx Container
+     nginx:
+        image: nginx:alpine
+        container_name: nginx  
+        volumes:
+          - ./nginx/default.conf:/etc/nginx/default.conf  #it will contain config file for reverse proxy.
+        ports:
+             -  "80:80" 
+        environment:
+             - SERVER_NAME=localhost
+
+### Web server ######
+     web_app1:
+          image: myweb:latest    #Images Created from HTML dockerfile , Will attach the Dockerfile
+          ports:
+             - "8080:8080"
+
+### Web server ######
+     web_app2:
+          image: myweb:latest    #Images Created from HTML dockerfile , Will attach the Dockerfile
+          ports:
+             - "8081:8080"
