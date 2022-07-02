@@ -1,16 +1,16 @@
 services:
      db:
-         Image: persona/percona-server:8.0
-         container_name: persona_mysql_8
-         ports:
+        image: persona/percona-server:8.0
+        container_name: persona_mysql_8
+        ports:
            - 6603:6603
         environment:
            -  MYSQL_PASSWORD=root
            -  MYSQL_ROOT_PASSWORD=Admin
            -  MYSQL_DATABSE=testdome
-         volumes:
+        volumes:
                -  /data:/var/lib/mysql
-         networks:
+        networks:
                - secure_db_network
 
 #### Adding Nginx Container
@@ -26,12 +26,12 @@ services:
 
 ### Web server ######
      web_app1:
-          image: myweb:latest    #Images Created from HTML dockerfile , Will attach the Dockerfile
-          ports:
-             - "8080:8080"
+        image: myweb:latest    #Images Created from HTML dockerfile , Will attach the Dockerfile
+        ports:
+           - "8080:8080"
 
 ### Web server ######
      web_app2:
-          image: myweb:latest    #Images Created from HTML dockerfile , Will attach the Dockerfile
-          ports:
-             - "8081:8080"
+        image: myweb:latest    #Images Created from HTML dockerfile , Will attach the Dockerfile
+        ports:
+           - "8081:8080"
